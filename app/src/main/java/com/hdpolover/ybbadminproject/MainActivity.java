@@ -3,6 +3,8 @@ package com.hdpolover.ybbadminproject;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -23,52 +25,48 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView text;
-
     FirebaseAuth mAuth;
+
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        text = findViewById(R.id.text);
+        progressDialog = new ProgressDialog(this);
 
         mAuth = FirebaseAuth.getInstance();
 
-        mAuth.signInAnonymously()
+        loginUser("hendrapolover@gmail.com", "hendra123");
+
+    }
+
+    private void loginUser(String email, String password) {
+        //show progress dialog
+        progressDialog.show();
+        mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("a", "signInAnonymously:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            test();
+                            progressDialog.dismiss();
+
+                            startActivity(new Intent(MainActivity.this, DashboardActivity.class));
+                            finish();
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("f", "signInAnonymously:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                            progressDialog.dismiss();
+
+                            Toast.makeText(MainActivity.this, "Sorry, email or password is invalid",
                                     Toast.LENGTH_SHORT).show();
                         }
 
-                        // ...
                     }
-                });
-
-    }
-
-    private void test() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Try");
-        reference.child("1").setValue(true).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                text.setText("Ada");
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+                }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                text.setText("No");
+                    progressDialog.dismiss();
+                    Toast.makeText(MainActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -76,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
     }
 }
