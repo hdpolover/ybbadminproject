@@ -44,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void loginUser(String email, String password) {
         //show progress dialog
+        progressDialog.setMessage("Signing in...");
         progressDialog.show();
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override

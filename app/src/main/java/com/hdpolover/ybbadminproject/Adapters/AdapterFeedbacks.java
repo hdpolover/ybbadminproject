@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,6 +50,13 @@ public class AdapterFeedbacks extends RecyclerView.Adapter<AdapterFeedbacks.MyHo
         holder.fEmailTv.setText(fEmail);
         holder.fContentTv.setText("\"" + fContent + "\"");
         holder.fTimeTv.setText(tc.convertTime(fTime));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
