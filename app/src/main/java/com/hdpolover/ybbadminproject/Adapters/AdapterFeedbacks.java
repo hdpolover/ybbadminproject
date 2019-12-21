@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.hdpolover.ybbadminproject.Models.ModelFeedback;
 import com.hdpolover.ybbadminproject.R;
+import com.hdpolover.ybbadminproject.TimeAgo;
 import com.hdpolover.ybbadminproject.TimeConverter;
+
+import org.ocpsoft.prettytime.PrettyTime;
 
 import java.util.List;
 
@@ -23,6 +26,7 @@ public class AdapterFeedbacks extends RecyclerView.Adapter<AdapterFeedbacks.MyHo
     List<ModelFeedback> modelFeedbacks;
 
     TimeConverter tc;
+    TimeAgo timeAgo;
 
     public AdapterFeedbacks(Context context, List<ModelFeedback> modelFeedbacks) {
         this.context = context;
@@ -49,7 +53,12 @@ public class AdapterFeedbacks extends RecyclerView.Adapter<AdapterFeedbacks.MyHo
 
         holder.fEmailTv.setText(fEmail);
         holder.fContentTv.setText("\"" + fContent + "\"");
-        holder.fTimeTv.setText(tc.convertTime(fTime));
+        //holder.fTimeTv.setText(tc.convertTime(fTime));
+        timeAgo = new TimeAgo();
+        holder.fTimeTv.setText(timeAgo.getTimeAgo(Long.parseLong(fTime)));
+
+        PrettyTime prettyTime = new PrettyTime();
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
