@@ -32,7 +32,7 @@ public class DashboardActivity extends AppCompatActivity {
         usersLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Clicked", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DashboardActivity.this, UsersActivity.class));
             }
         });
 
