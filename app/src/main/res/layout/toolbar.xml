@@ -24,10 +24,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Admin"
+                    android:text="Aldi's User Counter"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textSize="20sp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold"
                     android:layout_marginLeft="20dp"/>
 
             </LinearLayout>

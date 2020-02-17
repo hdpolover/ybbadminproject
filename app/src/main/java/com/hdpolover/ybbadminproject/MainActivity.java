@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             progressDialog.dismiss();
 
-                            startActivity(new Intent(MainActivity.this, DashboardActivity.class));
+                            startActivity(new Intent(MainActivity.this, UsersTotalActivity.class));
                             finish();
                         } else {
                             progressDialog.dismiss();
