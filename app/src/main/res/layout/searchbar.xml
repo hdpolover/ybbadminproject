@@ -10,22 +10,26 @@
         android:layout_height="wrap_content"
         app:contentPadding="5dp"
         app:cardCornerRadius="3dp"
-        app:cardBackgroundColor="@color/cardview_light_background">
+        app:cardBackgroundColor="@color/colorWhite">
 
         <LinearLayout
+            android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
+            <EditText
+                android:id="@+id/searchUserEt"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:hint="Search user"/>
+
+            <Button
+                android:id="@+id/searchBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_search1"/>
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Search feedback"/>
+                android:text="Search"/>
 
         </LinearLayout>
 
